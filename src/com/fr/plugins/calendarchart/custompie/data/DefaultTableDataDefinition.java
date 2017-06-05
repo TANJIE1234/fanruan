@@ -1,4 +1,4 @@
-package com.fr.plugins.democharts.custompie.data;
+package com.fr.plugins.calendarchart.custompie.data;
 
 import com.fr.base.chart.chartdata.ChartData;
 import com.fr.base.chart.chartdata.model.DataProcessor;
@@ -16,11 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by mango on 17/05/18.
- * 数据集数据
+ * Created by hzzz on 2017/6/2.
  */
-public class DemoTableDefinition extends TableDataDefinition {
-    public static final String XML_TAG = "DemoTableDefinition";
+public class DefaultTableDataDefinition extends TableDataDefinition {
+    public static final String XML_TAG = "DefaultTableDataDefinition";
 
     private String date;
     private String value;
@@ -41,14 +40,6 @@ public class DemoTableDefinition extends TableDataDefinition {
         this.value = value;
     }
 
-    /**
-     * 从数据定义属性生成 图表数据的结果集
-     *
-     * @param resultSet     数据集DataModel
-     * @param dataProcessor
-     * @return 图表数据
-     * @date 2014-9-21-下午10:36:47
-     */
     @Override
     public ChartData createChartData(DataModel resultSet, DataProcessor dataProcessor) {
         Map<String, String> data = new HashMap<>();
@@ -57,31 +48,25 @@ public class DemoTableDefinition extends TableDataDefinition {
             int wordValueCol = DataCoreUtils.getColumnIndexByName(resultSet, getValue());
             Map<Object, List<Object>> map = new HashMap<>();
 
-            for (int rowIndex = 0, tableRowCount = resultSet.getRowCount(); rowIndex < tableRowCount; rowIndex++) {
+            for (int rowIndex = 0; rowIndex < resultSet.getRowCount(); rowIndex++) {
                 Object wordName = resultSet.getValueAt(rowIndex, wordNameCol);
                 Object wordValue = resultSet.getValueAt(rowIndex, wordValueCol);
 
-                if (wordName == null || wordValue == null) {
-                    continue;
+                if (wordName != null && wordValue != null) {
+                    if (!map.containsKey(wordName)) {
+                        map.put(wordName, new ArrayList<>());
+                    }
+                    map.get(wordName).add(wordValue);
                 }
-
-                List<Object> list = map.get(wordName);
-                if (list == null) {
-                    list = new ArrayList<>();
-                    map.put(wordName, list);
-                }
-
-                list.add(wordValue);
             }
-
-            for (Object key : map.keySet()) {
-                List<Object> valueList = map.get(key);
-                data.put(key.toString(), valueList.get(0).toString());
+            for (Map.Entry<Object, List<Object>> entry : map.entrySet()) {
+                data.put(entry.getKey().toString(),
+                        entry.getValue().get(0).toString());
             }
         } catch (Exception e) {
             FRLogger.getLogger().error(e.getMessage(), e);
         }
-        return new DemoChartData(data);
+        return new TableDataContent(data);
     }
 
     public void writeXML(XMLPrintWriter writer) {
@@ -109,14 +94,14 @@ public class DemoTableDefinition extends TableDataDefinition {
     }
 
     public boolean equals(Object ob) {
-        return ob instanceof DemoTableDefinition
-                && ComparatorUtils.equals(((DemoTableDefinition) ob).getDate(), this.getDate())
-                && ComparatorUtils.equals(((DemoTableDefinition) ob).getValue(), this.getValue())
+        return ob instanceof DefaultTableDataDefinition
+                && ComparatorUtils.equals(((DefaultTableDataDefinition) ob).getDate(), this.getDate())
+                && ComparatorUtils.equals(((DefaultTableDataDefinition) ob).getValue(), this.getValue())
                 && super.equals(ob);
     }
 
     public Object clone() throws CloneNotSupportedException {
-        DemoTableDefinition cloned = (DemoTableDefinition) super.clone();
+        DefaultTableDataDefinition cloned = (DefaultTableDataDefinition) super.clone();
 
         cloned.setDate(getDate());
         cloned.setValue(getValue());

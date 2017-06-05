@@ -1,4 +1,4 @@
-package com.fr.plugins.democharts.web;
+package com.fr.plugins.calendarchart.web;
 
 import com.fr.stable.EncodeConstants;
 import com.fr.stable.fun.impl.AbstractJavaScriptFileHandler;
@@ -10,8 +10,8 @@ public class EChartsFileLoader extends AbstractJavaScriptFileHandler {
     @Override
     public String[] pathsForFiles() {
         return new String[]{
-                "/com/fr/plugins/democharts/web/echarts.loader.js",
-                "/com/fr/plugins/democharts/web/echarts.min.js"
+                "/com/fr/plugins/calendarchart/web/echarts.loader.js",
+                "/com/fr/plugins/calendarchart/web/echarts.min.js"
         };
     }
 

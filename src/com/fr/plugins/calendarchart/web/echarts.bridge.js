@@ -23,28 +23,7 @@ EChartsFactory.prototype = {
         debugger;
         //后台传过来的数据或者样式都在 this.options.chartAttr中
         var ct = this.options.chartAttr;
-        // function clear(str){return str.replace(/\s/g, '');}
-        // var cleanct = clear(ct);
-        // console.log(cleanct);
-        // var json = JSON.parse(cleanct);
-
         var myChart = echarts.init(this.$dom[0]);
-
-        function getVirtulData(year) {
-            year = year || '2017';
-            var date = +echarts.number.parseDate(year + '-01-01');
-            var end = +echarts.number.parseDate((+year + 1) + '-01-01');
-            var dayTime = 3600 * 24 * 1000;
-            var data = [];
-            for (var time = date; time < end; time += dayTime) {
-                data.push([
-                    echarts.format.formatTime('yyyy-MM-dd', time),
-                    Math.floor(Math.random() * 10000)
-                ]);
-            }
-            return data;
-        }
-
         var data = ct.data;
         var max = 0
         for (var i = 0; i < data.length; i += 1) {
@@ -52,6 +31,7 @@ EChartsFactory.prototype = {
                 max = data[i][1]
             }
         }
+        var year = echarts.number.parseDate(data[0][0]).getFullYear()
         max = max / 20
 
         option = {
@@ -59,8 +39,7 @@ EChartsFactory.prototype = {
 
             title: {
                 top: 30,
-                text: '2016年某人每天的步数',
-                subtext: '数据纯属虚构',
+                text: year + '年某人每天的步数',
                 left: 'center',
                 textStyle: {
                     color: '#fff'
@@ -78,9 +57,9 @@ EChartsFactory.prototype = {
                 }
             },
             calendar: [{
-                top: 150,
+                top: 100,
                 left: 'center',
-                range: ['2012-01-01', '2012-06-30'],
+                range: [year + '-01-01', year + '-6-30'],
                 splitLine: {
                     show: true,
                     lineStyle: {
@@ -103,9 +82,9 @@ EChartsFactory.prototype = {
                     }
                 }
             }, {
-                top: 340,
+                top: 290,
                 left: 'center',
-                range: ['2012-07-01', '2012-12-31'],
+                range: [year + '-07-01', year + '-12-31'],
                 splitLine: {
                     show: true,
                     lineStyle: {

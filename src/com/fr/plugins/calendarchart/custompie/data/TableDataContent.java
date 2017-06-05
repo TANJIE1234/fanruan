@@ -1,17 +1,17 @@
-package com.fr.plugins.democharts.custompie.data;
+package com.fr.plugins.calendarchart.custompie.data;
 
 import com.fr.chart.chartdata.NormalChartData;
 
 import java.util.Map;
 
 /**
- * Created by mango on 17/05/18.
- * 获取自定义的数据集
+ *
+ * Created by hzzz on 2017/6/2.
  */
-public class DemoChartData extends NormalChartData {
+public class TableDataContent extends NormalChartData {
     private final Map<String, String> data;
 
-    public DemoChartData(Map<String, String> data) {
+    TableDataContent(Map<String, String> data) {
         this.data = data;
     }
 

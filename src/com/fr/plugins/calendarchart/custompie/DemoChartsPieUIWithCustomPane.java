@@ -1,43 +1,31 @@
-package com.fr.plugins.democharts.custompie;
+package com.fr.plugins.calendarchart.custompie;
 
 import com.fr.chart.chartattr.Plot;
 import com.fr.design.chart.fun.impl.AbstractIndependentChartsUI;
 import com.fr.design.mainframe.chart.ChartsConfigPane;
 import com.fr.design.mainframe.chart.gui.ChartDataPane;
 import com.fr.design.mainframe.chart.gui.data.table.AbstractTableDataContentPane;
-import com.fr.plugins.democharts.custompie.data.pane.ChartConfigPane;
-import com.fr.plugins.democharts.custompie.data.pane.DemoTableDataContentPane;
+import com.fr.plugins.calendarchart.custompie.data.pane.ChartConfigPane;
+import com.fr.plugins.calendarchart.custompie.data.pane.TableDataContentPane;
 
-/**
- * Created by mengao on 2017/4/26.
- * 自定义图表类型设设计界面，需要继承AbstractIndependentChartsUI
- * 需要实现方法：getChartConfigPane
- * 需要实现方法：currentAPILevel
- */
 public class DemoChartsPieUIWithCustomPane extends AbstractIndependentChartsUI {
 
     /**
-     * @param plot
-     * @param parent
-     * @return 数据集数据配置面板，自定义数据集数据配置面板需要重写
+     * @return 数据集数据配置面板
      */
     @Override
     public AbstractTableDataContentPane getTableDataSourcePane(Plot plot, ChartDataPane parent) {
-        return new DemoTableDataContentPane(parent);
+        return new TableDataContentPane(parent);
     }
 
     /**
-     * @param plotID
-     * @return 图表样式面板，用户需要实现
+     * @return 图表样式面板
      */
     @Override
     public ChartsConfigPane getChartConfigPane(String plotID) {
         return new ChartConfigPane();
     }
 
-    /**
-     * @return 插件的API等级
-     */
     @Override
     public int currentAPILevel() {
         return CURRENT_API_LEVEL;
