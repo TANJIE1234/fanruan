@@ -42,11 +42,11 @@ public class DefaultTableDataDefinition extends TableDataDefinition {
 
     @Override
     public ChartData createChartData(DataModel resultSet, DataProcessor dataProcessor) {
-        Map<String, String> data = new HashMap<>();
+        Map<String, String> data = new HashMap();
         try {
             int wordNameCol = DataCoreUtils.getColumnIndexByName(resultSet, getDate());
             int wordValueCol = DataCoreUtils.getColumnIndexByName(resultSet, getValue());
-            Map<Object, List<Object>> map = new HashMap<>();
+            Map<Object, List<Object>> map = new HashMap();
 
             for (int rowIndex = 0; rowIndex < resultSet.getRowCount(); rowIndex++) {
                 Object wordName = resultSet.getValueAt(rowIndex, wordNameCol);
@@ -54,7 +54,7 @@ public class DefaultTableDataDefinition extends TableDataDefinition {
 
                 if (wordName != null && wordValue != null) {
                     if (!map.containsKey(wordName)) {
-                        map.put(wordName, new ArrayList<>());
+                        map.put(wordName, new ArrayList());
                     }
                     map.get(wordName).add(wordValue);
                 }

@@ -20,7 +20,6 @@ EChartsFactory.prototype = {
     constructor: EChartsFactory,
 
     inits: function () {
-        debugger;
         //后台传过来的数据或者样式都在 this.options.chartAttr中
         var ct = this.options.chartAttr;
         var myChart = echarts.init(this.$dom[0]);
@@ -32,6 +31,7 @@ EChartsFactory.prototype = {
             }
         }
         var year = echarts.number.parseDate(data[0][0]).getFullYear()
+        var title = ct.title
         max = max / 20
 
         option = {
@@ -39,7 +39,7 @@ EChartsFactory.prototype = {
 
             title: {
                 top: 30,
-                text: year + '年某人每天的步数',
+                text: title,
                 left: 'center',
                 textStyle: {
                     color: '#fff'
@@ -51,7 +51,7 @@ EChartsFactory.prototype = {
             legend: {
                 top: '30',
                 left: '100',
-                data: ['步数', 'Top 12'],
+                data: ['step count', 'Top 12'],
                 textStyle: {
                     color: '#fff'
                 }
@@ -109,7 +109,7 @@ EChartsFactory.prototype = {
             }],
             series: [
                 {
-                    name: '步数',
+                    name: 'step count',
                     type: 'scatter',
                     calendarIndex: 0,
                     coordinateSystem: 'calendar',
@@ -124,7 +124,7 @@ EChartsFactory.prototype = {
                     }
                 },
                 {
-                    name: '步数',
+                    name: 'step count',
                     type: 'scatter',
                     coordinateSystem: 'calendar',
                     calendarIndex: 1,

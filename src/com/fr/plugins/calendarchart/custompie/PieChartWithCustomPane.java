@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class PieChartWithCustomPane extends Charts {
     private final static String TAG_NAME = "customChartDemo";
-    private String customData = "自定义数据配置面板demo";
+    private String customData = "日历活动图表demo";
 
     public String getCustomData() {
         return customData;
@@ -55,11 +55,12 @@ public class PieChartWithCustomPane extends Charts {
     public JSONObject toJSON(Repository repo) throws JSONException {
         assert getChartData() instanceof TableDataContent;
         Map<String, String> data = ((TableDataContent) getChartData()).getData();
-        List<String[]> dataLst = new ArrayList<>();
+        List<String[]> dataLst = new ArrayList();
         for (Map.Entry<String, String> dataEntry : data.entrySet()) {
             dataLst.add(new String[]{dataEntry.getKey(), dataEntry.getValue()});
         }
-        return JSONObject.create().put("data", dataLst);
+        return JSONObject.create().put("data", dataLst)
+                .put("title", getCustomData());
     }
 
     public TopDefinition readDefinitionXML(XMLableReader xmLableReader) {

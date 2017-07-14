@@ -11,7 +11,7 @@ public class DemoChartsPieWithCustomPane extends AbstractIndependentChartsProvid
 
     @Override
     public String getChartName() {
-        return "自定义数据配置面板图表";
+        return "日历活动图表";
     }
 
     @Override
