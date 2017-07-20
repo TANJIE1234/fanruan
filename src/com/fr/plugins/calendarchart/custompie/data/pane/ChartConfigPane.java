@@ -40,7 +40,7 @@ public class ChartConfigPane extends ChartsConfigPane<PieChartWithCustomPane> {
     }
 
     @Override
-    public Class<? extends Charts> accptType() {
+    public Class<? extends Charts> acceptType() {
         return PieChartWithCustomPane.class;
     }
 
